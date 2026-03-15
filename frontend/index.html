@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Vivienda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #002B5E, #004a8f);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .login-section, .dashboard, .user-info {
+            padding: 30px;
+        }
+
+        .login-section {
+            background-color: #f9fafb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #002B5E;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #002B5E;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #004a8f;
+        }
+
+        .logout-btn {
+            background-color: #d33;
+        }
+
+        .logout-btn:hover {
+            background-color: #b00;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e5e7eb;
+        }
+
+        .menu {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .menu button {
+            flex: 1 1 150px;
+            background-color: #e0e7ff;
+            color: #002B5E;
+            font-weight: 600;
+        }
+
+        .menu button:hover {
+            background-color: #c7d2fe;
+        }
+
+        .panel {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #002B5E;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .error {
+            color: red;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🏦 Banco de Vivienda</h1>
+            <p>Guatemala · Servicios en Línea</p>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="loginSection" class="login-section">
+            <h2>Iniciar sesión</h2>
+            <div class="form-group">
+                <label>Usuario:</label>
+                <input type="text" id="username" placeholder="jperez, mlopez, etc." value="jperez">
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" id="password" value="123">
+            </div>
+            <div class="form-group">
+                <label>Rol:</label>
+                <select id="rol">
+                    <option value="cliente">Cliente</option>
+                    <option value="colaborador">Colaborador</option>
+                </select>
+            </div>
+            <button onclick="login()">Ingresar</button>
+            <div id="loginError" class="error hidden"></div>
+        </div>
+
+        <!-- INFO USUARIO -->
+        <div id="userInfo" class="user-info hidden">
+            <span id="bienvenida">Bienvenido</span>
+            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="dashboard hidden">
+            <div id="menuDinamico" class="menu"></div>
+            <div id="panelContenido" class="panel">
+                <h3>Selecciona una opción</h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
